@@ -1,7 +1,9 @@
 # MCNN
 世界首个我的世界强模神经网络
 
-![](src/2024-08-21_23.24.54.png)
+<div align=center>
+	<img src="src/2024-08-21_23.24.54.png"/>
+</div>
 
 # 1. Start
 
