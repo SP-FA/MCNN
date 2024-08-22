@@ -5,6 +5,8 @@
 	<img src="src/2024-08-21_23.24.54.png"/>
 </div>
 
+![](https://img.shields.io/badge/any_text-you_like-blue)
+
 # 1. Start
 
 ## 1.1 Environment
