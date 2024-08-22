@@ -5,13 +5,17 @@
 	<img src="src/2024-08-21_23.24.54.png"/>
 </div>
 
-![](https://img.shields.io/badge/any_text-you_like-blue)
+<div align=center>
+	<img src="https://img.shields.io/badge/Python-3.9-blue"/>
+	<img src="https://img.shields.io/badge/Pytorch-2.2-orange"/>
+	<img src="https://img.shields.io/badge/Minecraft-1.19.4-green"/>
+</div>
 
 # 1. Start
 
 ## 1.1 Environment
 
-Python == 1.19
+Python == 3.9
 
 Packages
 - torch
