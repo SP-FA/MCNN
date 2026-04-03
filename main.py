@@ -3,8 +3,7 @@ import torch.nn as nn
 from torchvision import datasets, transforms
 from torch.utils import data
 from tqdm import tqdm
-from model import MLPMCNN
-
+from model import MCNN_MLP, MCNN_CNN
 
 torch.set_printoptions(profile="full")
 
@@ -42,7 +41,7 @@ if __name__ == '__main__':
         datasets.MNIST('data', train=False, download=True, transform=test_transformer),
         batch_size=batch_size, shuffle=True)
 
-    model = MLPMCNN()
+    model = MCNN_CNN()
     lossF = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 
@@ -82,4 +81,4 @@ if __name__ == '__main__':
                 totalY += len(y)
                 pbar.set_description(f"[Test ] Epoch: {epoch} Accuracy: {correct / totalY:.3}")
 
-    torch.save(model.state_dict(), "./MCNN_parameters.pkl")
+    torch.save(model.state_dict(), "./MCNN_CNN_parameters.pkl")

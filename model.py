@@ -8,22 +8,21 @@ import numpy as np
 np.set_printoptions(linewidth=95)
 
 
-class MLPMCNN(nn.Module):
+class MCNN_MLP(nn.Module):
     def __init__(self):
-        super(MLPMCNN, self).__init__()
+        super(MCNN_MLP, self).__init__()
         self.fc1 = nn.Linear(15 * 15, 4, bias=False).cuda()
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(4, 10, bias=False).cuda()
-        self.x_list = []
 
     def forward(self, x):
-        # return self.simulate_mc(x)
+        return self.simulate_mc(x)
 
-        x = x.reshape(-1, 15 * 15)
-        x = self.fc1(x)
-        x = self.relu(x)
-        x = self.fc2(x)
-        return x
+        # x = x.reshape(-1, 15 * 15)
+        # x = self.fc1(x)
+        # x = self.relu(x)
+        # x = self.fc2(x)
+        # return x
 
     def simulate_mc(self, x):
         """模拟游戏中的计算过程
@@ -62,3 +61,27 @@ class MLPMCNN(nn.Module):
         sx[sx_minus] = sx[sx_minus] - 4194304
         return sx.view(1, -1)
 
+    def command(self, weight, i, x, y ,z):
+        with open(f"./weights_command_{i}.mcfunction", "w") as f:
+            w = weight[i].view(15, 15).flip(dims=[1]).numpy()
+            for j in range(15):
+                for k in range(15):
+                    if i % 2 == 0:
+                        f.write(f"data merge block {x + k * 2 + (1 - j % 2)} {y - (j // 2) * 4} {z} {{SuccessCount:{w[j][k]}}}\n")
+                    else:
+                        f.write(f"data merge block {x + k * 2 +      j % 2 } {y - (j // 2) * 4} {z} {{SuccessCount:{w[j][k]}}}\n")
+
+
+class MCNN_CNN(nn.Module):
+    def __init__(self):
+        super(MCNN_CNN, self).__init__()
+        self.conv = nn.Conv2d(in_channels=1, out_channels=2, kernel_size=5, stride=3, bias=True).cuda()
+        self.relu = nn.ReLU()
+        self.linear = nn.Linear(2 * 4 * 4, 10, bias=True).cuda()
+
+    def forward(self, x):
+        x = self.conv(x)
+        x = self.relu(x)
+        x = x.view(-1, 2 * 4 * 4)
+        x = self.linear(x)
+        return x

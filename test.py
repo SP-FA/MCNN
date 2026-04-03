@@ -4,7 +4,7 @@ from torchvision import datasets, transforms
 from torch.utils import data
 from tqdm import tqdm
 
-from model import MLPMCNN
+from model import MCNN_MLP
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -29,7 +29,7 @@ test_loader = data.DataLoader(
         batch_size=1, shuffle=True)
 
 
-model = MLPMCNN()
+model = MCNN_MLP()
 model.load_state_dict(torch.load("MCNN_parameters.pkl"))
 
 # 单个样例
